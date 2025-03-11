@@ -1,23 +1,51 @@
 pipeline {
-    agent any  // Runs on any available agent
+    agent any  // Runs on any available Jenkins agent
 
     stages {
-        stage('Test Start') {
+        stage('Initialize') {
             steps {
-                echo 'Hello, Jenkins! Pipeline is running...'
+                echo 'Starting Jenkins pipeline...'
             }
         }
 
-        stage('Check System Info') {
+        stage('Build') {
             steps {
-                sh 'uname -a'  // Runs a basic system info command
+                echo 'Building the project...'
+                sh 'echo Simulating build process'
             }
         }
 
-        stage('Success') {
+        stage('Test') {
             steps {
-                echo 'Jenkins test pipeline executed successfully!'
+                echo 'Running tests...'
+                sh 'echo Simulating test execution'
             }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+                sh 'echo Simulating deployment'
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                echo 'Cleaning up resources...'
+                sh 'echo Simulating cleanup'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline execution finished!'
+        }
+        success {
+            echo 'Pipeline completed successfully! ✅'
+        }
+        failure {
+            echo 'Pipeline failed! ❌'
         }
     }
 }
